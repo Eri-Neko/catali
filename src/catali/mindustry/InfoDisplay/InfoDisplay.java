@@ -53,6 +53,10 @@ public class InfoDisplay {
     public void showFollowDisplay(Player player, DisplayPack displayPack) {
         displayContent(player, displayPack, true);
     }
+    
+    public void hideFollowDisplay(Player player, int displayId) {
+        Call.hideFollowUpMenu(player.con, displayId);
+    }
 
     public void showInput(Player player, TextInputPack textInputPack) {
         try {

@@ -21,17 +21,22 @@ public class NekoPlugin extends Plugin {
 
     @Override
     public void registerClientCommands(CommandHandler handler) {
+        handler.removeCommand("a");
+        handler.removeCommand("votekick");
+        handler.removeCommand("vote");
+
         handler.<Player>register("wiki", "Open game wiki", (args, player) -> {
             MindustryService.showWiki(player);
+        });
+
+        handler.<Player>register("play", "Play game", (args, player) -> {
+            
         });
     }
 
     @Override
     public void registerServerCommands(CommandHandler handler) {
         handler.removeCommand("exit");
-        handler.removeCommand("a");
-        handler.removeCommand("votekick");
-        handler.removeCommand("vote");
 
         handler.register("exit", "Custom shutdown method", args -> {
             Log.info("Shutting down server.");
@@ -39,6 +44,7 @@ public class NekoPlugin extends Plugin {
             net.dispose();
             Core.app.exit();
         });
+
     }
 
     public static final String infoGameplay = """

@@ -7,7 +7,7 @@ import catali.singeton.NekoGameplay;
 public class NekoVars {
     public static TaskScheduler taskScheduler = new TaskScheduler();
     public static InfoDisplay infoDisplay = InfoDisplay.getInstance();
-    public static NekoGameplay nekoGameplay = NekoGameplay.getNekogameplay();
+    public static NekoGameplay nekoGameplay = NekoGameplay.getNekoGameplay();
 
     public static void init() {
         infoDisplay.init();

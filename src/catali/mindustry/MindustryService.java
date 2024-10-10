@@ -11,7 +11,7 @@ public class MindustryService {
 	public static void showPlay(Player player, PlayerService playerService) {
 		infoDisplay.showDisplay(player, new DisplayPack(0,
 				"--- Option Menu ---",
-				"Are you wanna to play?",
+				"Are you want to play?",
 				new String[][] { { "Yes", "No" } }, 
 				new InfoDisplayRunnable[] {
 						playerService::action,
