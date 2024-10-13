@@ -7,13 +7,13 @@ import java.util.Map;
 import java.util.Random;
 
 import arc.math.Mathf;
-import arc.math.geom.Position;
 import arc.util.Align;
 import arc.util.Time;
 import catali.NekoVars;
 import catali.mindustry.WorldService;
 import catali.types.GamemodeTeam;
-import catali.types.GamemodeTeamControl;
+import catali.types.GamemodeTeamManager;
+import catali.types.UpgradeMap;
 import mindustry.game.Team;
 import mindustry.gen.Call;
 import mindustry.gen.Groups;
@@ -25,7 +25,7 @@ public class GamemodeCore {
     private Random random = new Random();
     private static GamemodeCore gamemodeCore = new GamemodeCore();
     private final MapControl mapControl = MapControl.getInstance();
-    private GamemodeTeamControl teams = new GamemodeTeamControl();
+    private GamemodeTeamManager teams = new GamemodeTeamManager();
     private Map<String, int[]> leaveTeam = new HashMap<>();
 
     private GamemodeCore() {
@@ -52,21 +52,55 @@ public class GamemodeCore {
         Groups.player.forEach(player -> {
             Integer playerTeamId = teams.getTeamIdByPlayerUuid(player.uuid());
             Integer leaderTeamId = teams.getTeamIdByLeaderUuid(player.uuid());
+            StringBuilder string = new StringBuilder();
 
-            if (playerTeamId != null && player.team().id != playerTeamId) {
-                player.team(Team.get(playerTeamId));
-            } else if (leaderTeamId != null && player.team().id != leaderTeamId) {
-                player.team(Team.get(leaderTeamId));
+            if (playerTeamId != null) {
+                if (player.team().id != playerTeamId)
+                    player.team(Team.get(playerTeamId));
+                GamemodeTeam playerTeam = teams.getTeam(playerTeamId);
+                UpgradeMap upgrade = playerTeam.getUpgradeMapInstane();
+
+                string.append("Team of: " + playerTeam.getLeader() + "[][][][][][][][][][][][]\n");
+                string.append("Lvl ").append(playerTeam.getLevel()).append(", XP: ")
+                        .append(playerTeam.getXp()).append("/").append(playerTeam.getCost())
+                        .append(" - ").append(playerTeam.getXp() / playerTeam.getCost() * 100).append("%\n");
+                string.append("HP: + x").append(upgrade.getMaxHpUpgradeCount() * 5).append("%\n");
+                string.append("DMG: + x").append(upgrade.getDamageUpgradeCount() * 5).append("%\n");
+                string.append("MSPD: + x").append(upgrade.getMovementSpeedUpgradeCount() * 5).append("%\n");
+                string.append("Heal: + ").append(upgrade.getHealUpgradeCount() * 40).append("/s\n");
+
+            } else if (leaderTeamId != null) {
+                if (player.team().id != leaderTeamId)
+                    player.team(Team.get(leaderTeamId));
+                GamemodeTeam leaderTeam = teams.getTeam(leaderTeamId);
+                UpgradeMap upgrade = leaderTeam.getUpgradeMapInstane();
+
+                string.append("Your team stat: \n");
+                string.append("Lvl ").append(leaderTeam.getLevel()).append(", XP: ")
+                        .append(leaderTeam.getXp()).append("/").append(leaderTeam.getCost())
+                        .append(" - ").append(leaderTeam.getXp() / leaderTeam.getCost() * 100).append("%\n");
+                string.append("HP: + x").append(upgrade.getMaxHpUpgradeCount() * 5).append("%\n");
+                string.append("DMG: + x").append(upgrade.getDamageUpgradeCount() * 5).append("%\n");
+                string.append("MSPD: + x").append(upgrade.getMovementSpeedUpgradeCount() * 5).append("%\n");
+                string.append("Heal: + ").append(upgrade.getHealUpgradeCount() * 40).append("/s\n");
+
             } else if (playerTeamId == null && leaderTeamId == null) {
                 player.team(Team.derelict);
+                string.append("Type /play to play...");
             }
 
-            String message = """
-                    Meow meow ~~~
-                    """;
-
-            Call.infoPopupReliable(player.con, message, 1.01f, Align.topLeft, player.con.mobile ? 160 : 90, 5, 0, 0);
+            string.append(getLeaderboard());
+            Call.infoPopupReliable(player.con, string.toString(), 1, 10, player.con.mobile ? 160 : 90, 5, 0, 0);
         });
+    }
+
+    public String getLeaderboard() {
+        return """
+                --- Leaderboard ---
+                1: [pink]<meo> []neko-chan
+                2: [pink]<meo> []neko-chan
+                3: [pink]<meo> []neko-chan
+                """;
     }
 
     public void handlePlayerJoin(Player player) {
@@ -91,11 +125,10 @@ public class GamemodeCore {
                 teams.getTeam(teamId).getAvalableUnits().forEach(unit -> {
                     unit.spawn(Team.get(teamId), pos.x, pos.y);
                 });
-                
-                player.x(pos.x);
-                player.y(pos.y);
-            }
 
+                player.set(pos.x, pos.y);
+                player.unit(Groups.unit.find(u -> u.team == Team.get(teamId)));
+            }
         }
     }
 

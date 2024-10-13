@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.Set;
 
 // Chat GPT 100%
-public class GamemodeTeamControl {
+public class GamemodeTeamManager {
     private final Map<Integer, GamemodeTeam> teams = new HashMap<>();
     private final Map<String, Integer> playerTeamMap = new HashMap<>(); // Lưu UUID của player với teamId
     private final Map<String, Integer> leaderTeamMap = new HashMap<>(); // Lưu UUID của player với teamId
