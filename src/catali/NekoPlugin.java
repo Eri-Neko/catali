@@ -44,7 +44,6 @@ public class NekoPlugin extends Plugin {
             net.dispose();
             Core.app.exit();
         });
-
     }
 
     public static final String infoGameplay = """

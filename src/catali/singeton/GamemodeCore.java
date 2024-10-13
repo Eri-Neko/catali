@@ -1,49 +1,71 @@
 package catali.singeton;
 
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
-
-import arc.util.Time;
-
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import arc.math.Mathf;
+import arc.math.geom.Position;
+import arc.util.Align;
+import arc.util.Time;
 import catali.NekoVars;
 import catali.mindustry.WorldService;
-import mindustry.content.UnitTypes;
+import catali.types.GamemodeTeam;
+import catali.types.GamemodeTeamControl;
 import mindustry.game.Team;
+import mindustry.gen.Call;
+import mindustry.gen.Groups;
 import mindustry.gen.Player;
-import mindustry.type.UnitType;
 
-import static mindustry.Vars.*;
+import static mindustry.Vars.state;
 
 public class GamemodeCore {
     private Random random = new Random();
     private static GamemodeCore gamemodeCore = new GamemodeCore();
     private final MapControl mapControl = MapControl.getInstance();
-    private Map<Integer, GamemodeTeam> teams = new HashMap<>();
-    private Set<String> players = new HashSet<>();
-    private Map<String, long[]> leaveTeam = new HashMap<>();
+    private GamemodeTeamControl teams = new GamemodeTeamControl();
+    private Map<String, int[]> leaveTeam = new HashMap<>();
 
     private GamemodeCore() {
-        NekoVars.taskScheduler.addTask(this::refresh, 0, 1000);
-
+        NekoVars.taskScheduler.addTask(() -> {
+            if (mapControl.isGame()) {
+                refresh();
+            }
+        }, 1000, 1000);
     }
 
     public static GamemodeCore getInstance() {
         return gamemodeCore;
     }
 
-    public void handleBlockDestroy() {
-
-    }
-
     public void refresh() {
-        teams.forEach((tId, team) -> {
-            team.getAllPlayer().forEach((uuid) -> {
-                
-            });
+        // handle leave
+        leaveTeam.forEach((uuid, items) -> {
+            if (items[1] > Time.millis() + 30000) {
+                teams.removeTeam(items[0]);
+            }
+        });
+
+        // apply modifier later
+        Groups.player.forEach(player -> {
+            Integer playerTeamId = teams.getTeamIdByPlayerUuid(player.uuid());
+            Integer leaderTeamId = teams.getTeamIdByLeaderUuid(player.uuid());
+
+            if (playerTeamId != null && player.team().id != playerTeamId) {
+                player.team(Team.get(playerTeamId));
+            } else if (leaderTeamId != null && player.team().id != leaderTeamId) {
+                player.team(Team.get(leaderTeamId));
+            } else if (playerTeamId == null && leaderTeamId == null) {
+                player.team(Team.derelict);
+            }
+
+            String message = """
+                    Meow meow ~~~
+                    """;
+
+            Call.infoPopupReliable(player.con, message, 1.01f, Align.topLeft, player.con.mobile ? 160 : 90, 5, 0, 0);
         });
     }
 
@@ -55,94 +77,91 @@ public class GamemodeCore {
         }
     }
 
-    public void handlePlayerLeave(String uuid) {
-        if (isPlayerPlaying(uuid) && getTeamByLeaderUuid(uuid) != -1) {
-            leaveTeam.put(uuid, new long[] { getTeamByLeaderUuid(uuid), Time.millis() });
-        }
-    }
-
     public void handlePlayerPlay(String uuid) {
-        if (!isPlayerPlaying(uuid)) {
-            players.add(uuid);
-            teams.put(pickRandomizeTeam(), new GamemodeTeam(uuid));
-        }
-    }
+        Player player = WorldService.findPlayerWithUUid(uuid);
+        if (!isPlayerPlaying(uuid) && player != null) {
+            Postion2D pos = getRandomPlace();
+            int teamId = pickRandomizeTeam();
 
-    public static class GamemodeTeam {
-        private final String leaderUuid;
-        private final Set<String> teammateUUids = new HashSet<>();
-        private final Set<UnitType> units = new HashSet<>();
-        private int level = 1;
-        private int exp = 0;
-        private int expNeed = 10;
-
-        public GamemodeTeam(String uuid) {
-            leaderUuid = uuid;
-            units.add(UnitTypes.poly);
-        }
-
-        public String getLeader() {
-            return leaderUuid;
-        }
-
-        public boolean isPlayerInTeam(String uuid) {
-            return leaderUuid == uuid | teammateUUids.contains(uuid);
-        }
-
-        public void addPlayer(String uuid) {
-            teammateUUids.add(uuid);
-        }
-
-        public void removePlayer(String uuid) {
-            teammateUUids.remove(uuid);
-        }
-
-        public Set<String> getAllPlayer() {
-            Set<String> list = new HashSet<>(teammateUUids);
-            list.add(leaderUuid);
-            return list;
-        }
-
-        public Set<UnitType> getAvalableUnits() {
-            return units;
-        }
-    }
-
-    public long getTeamByLeaderUuid(String uuid) {
-        final int[] teamId = { -1 };
-
-        teams.forEach((tId, team) -> {
-            if (team.leaderUuid.equals(uuid)) {
-                teamId[0] = tId;
+            if (pos == null) {
+                Call.sendMessage("You cannot spawn now because server not have enough safety place for new spawm");
+                return;
+            } else {
+                teams.addTeam(teamId, new GamemodeTeam(uuid));
+                teams.getTeam(teamId).getAvalableUnits().forEach(unit -> {
+                    unit.spawn(Team.get(teamId), pos.x, pos.y);
+                });
+                
+                player.x(pos.x);
+                player.y(pos.y);
             }
-        });
 
-        return teamId[0];
+        }
     }
 
-    public long getTeamByPlayerUuid(String uuid) {
-        final int[] teamId = { -1 };
-
-        teams.forEach((tId, team) -> {
-            if (team.isPlayerInTeam(uuid)) {
-                teamId[0] = tId;
-            }
-        });
-
-        return teamId[0];
+    public void handlePlayerLeave(String uuid) {
+        if (isPlayerPlaying(uuid) && teams.getTeamIdByLeaderUuid(uuid) != null) {
+            leaveTeam.put(uuid, new int[] { teams.getTeamIdByLeaderUuid(uuid), (int) Time.millis() });
+        }
     }
 
+    // functions
     public boolean isPlayerPlaying(String uuid) {
-        return players.contains(uuid);
+        return teams.isPlayerPlaying(uuid);
     }
 
     public int pickRandomizeTeam() {
         int teamId = random.nextInt(1, 255);
-        if (teams.size() > 50)
-            return -1;
-        if (teams.get(teamId) == null)
-            return teamId;
-        else
+
+        if (teams.hasTeam(teamId))
             return pickRandomizeTeam();
+        else
+            return teamId;
+    }
+
+    public Postion2D getRandomPlace() {
+        boolean[][] playerGrid = getPlayerGrid();
+        int width = playerGrid.length;
+        int height = playerGrid[0].length;
+
+        List<Postion2D> emptyPositions = new ArrayList<>();
+        for (int x = 0; x < width; x++) {
+            for (int y = 0; y < height; y++) {
+                if (!playerGrid[x][y]) {
+                    emptyPositions.add(new Postion2D(x * 50 + 25, y * 50 + 25));
+                }
+            }
+        }
+
+        if (emptyPositions.isEmpty())
+            return null;
+        return emptyPositions.get(Mathf.random(emptyPositions.size() - 1));
+    }
+
+    public boolean[][] getPlayerGrid() {
+        int mapWidth = state.map.width / 50;
+        int mapHeight = state.map.height / 50;
+
+        boolean[][] gridMap = new boolean[mapWidth][mapHeight];
+
+        Groups.player.forEach(player -> {
+            if (player.unit() != null) {
+                int gridX = Mathf.clamp((int) player.unit().x / 50, 0, mapWidth - 1);
+                int gridY = Mathf.clamp((int) player.unit().y / 50, 0, mapHeight - 1);
+                gridMap[gridX][gridY] = true;
+            }
+        });
+
+        return gridMap;
+    }
+
+    public class Postion2D {
+        public final int x;
+        public final int y;
+
+        public Postion2D(int x, int y) {
+            this.x = x;
+            this.y = y;
+        }
     }
 }

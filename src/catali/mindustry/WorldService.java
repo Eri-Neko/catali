@@ -2,6 +2,7 @@ package catali.mindustry;
 
 import mindustry.game.Team;
 import mindustry.gen.Groups;
+import mindustry.gen.Player;
 import mindustry.maps.Map;
 import mindustry.net.WorldReloader;
 
@@ -10,8 +11,15 @@ import static mindustry.Vars.*;
 import arc.util.Log;
 
 public class WorldService {
+    public static Player findPlayerWithUUid(String uuid) {
+        return Groups.player.find(p -> p.uuid() == uuid);
+    }
+
     public static void changeTeamForPlayer(String uuid, Team team) {
-        Groups.player.find(p -> p.uuid() == uuid).team(team);
+        Player player = findPlayerWithUUid(uuid);
+        if (player != null) {
+            player.team(team);
+        }
     }
 
     public static boolean loadMap(Map map) {

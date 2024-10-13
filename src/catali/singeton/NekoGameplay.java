@@ -1,17 +1,12 @@
 package catali.singeton;
 
 import arc.Events;
-import arc.util.Align;
-
-import catali.NekoVars;
 import catali.mindustry.MindustryService;
-
-import mindustry.game.EventType.BlockDestroyEvent;
+import mindustry.game.EventType.BuildingBulletDestroyEvent;
 import mindustry.game.EventType.PlayerJoin;
 import mindustry.game.EventType.PlayerLeave;
-import mindustry.game.EventType.UnitDestroyEvent;
+import mindustry.game.EventType.UnitBulletDestroyEvent;
 import mindustry.gen.Call;
-import mindustry.gen.Groups;
 import mindustry.gen.Player;
 
 public class NekoGameplay {
@@ -31,19 +26,8 @@ public class NekoGameplay {
         mapControl.startAutomaticRandomEndless();
         Events.on(PlayerJoin.class, event -> handlePlayerJoin(event.player));
         Events.on(PlayerLeave.class, event -> handlePlayerLeave(event.player));
-        Events.on(BlockDestroyEvent.class, null);
-        Events.on(UnitDestroyEvent.class, null);
-        NekoVars.taskScheduler.addTask(this::refresh, 0, 1000);
-    }
-
-    public void refresh() {
-        Groups.player.each(player -> {
-            String message = """
-                    Meow meow ~~~
-                    """;
-
-            Call.infoPopupReliable(player.con, message, 1.01f, Align.topLeft, player.con.mobile ? 160 : 90, 5, 0, 0);
-        });
+        Events.on(BuildingBulletDestroyEvent.class, null);
+        Events.on(UnitBulletDestroyEvent.class, null);
     }
 
     public void handlePlayerJoin(Player player) {
@@ -74,4 +58,6 @@ public class NekoGameplay {
             Call.sendMessage("You playing this game, not need to do it again.");
         }
     }
+
+    
 }
