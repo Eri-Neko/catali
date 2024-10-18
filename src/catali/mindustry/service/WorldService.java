@@ -1,14 +1,18 @@
-package catali.mindustry;
+package catali.mindustry.service;
 
+import mindustry.game.Gamemode;
 import mindustry.game.Team;
 import mindustry.gen.Groups;
 import mindustry.gen.Player;
+import mindustry.gen.Unit;
 import mindustry.maps.Map;
 import mindustry.net.WorldReloader;
-
-import static mindustry.Vars.*;
+import mindustry.type.UnitType;
 
 import arc.util.Log;
+
+import static mindustry.Vars.*;
+import static catali.NekoVars.*;
 
 public class WorldService {
     public static Player findPlayerWithUUid(String uuid) {
@@ -31,11 +35,13 @@ public class WorldService {
                 world.loadMap(map);
                 worldReloader.end();
                 logic.play();
-                Log.info("mew mew");
             } else {
+                logic.reset();
                 world.loadMap(map);
+                logic.play();
             }
 
+            state.rules = map.applyRules(Gamemode.sandbox);
             state.rules.pvpAutoPause = false;
             state.rules.canGameOver = false;
             Log.info("Map loaded. Map name: @", map.plainName());
@@ -44,5 +50,15 @@ public class WorldService {
             Log.err("Fail to load map: " + map.plainName(), e);
             return false;
         }
+    }
+
+    public static Unit spawnUnit(UnitType unitType, int teamId, int x, int y) {
+        if (mapControl.isGame()) {
+            Unit unit = unitType.spawn(0, 0);
+            unit.team(Team.get(teamId));
+            unit.set(x * tilesize, y * tilesize);
+            return unit;
+        } else
+            return null;
     }
 }

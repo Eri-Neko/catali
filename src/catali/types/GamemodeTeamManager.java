@@ -11,6 +11,11 @@ public class GamemodeTeamManager {
     private final Map<String, Integer> playerTeamMap = new HashMap<>(); // Lưu UUID của player với teamId
     private final Map<String, Integer> leaderTeamMap = new HashMap<>(); // Lưu UUID của player với teamId
     private final Set<String> players = new HashSet<>(); // Lưu danh sách các player đang chơi
+    
+    // Get all player
+    public Set<String> getAllPlayers() {
+        return new HashSet<>(players);
+    }
 
     // Thêm một team mới với teamId
     public void addTeam(int teamId, GamemodeTeam team) {

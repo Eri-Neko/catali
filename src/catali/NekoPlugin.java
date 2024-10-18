@@ -3,11 +3,14 @@ package catali;
 import arc.Core;
 import arc.util.CommandHandler;
 import arc.util.Log;
-import catali.mindustry.MindustryService;
+import catali.mindustry.service.MindustryService;
+import mindustry.content.Blocks;
+import mindustry.game.Team;
 import mindustry.gen.Player;
 import mindustry.mod.Plugin;
 
 import static mindustry.Vars.*;
+import static catali.NekoVars.*;
 
 public class NekoPlugin extends Plugin {
     @Override
@@ -30,7 +33,7 @@ public class NekoPlugin extends Plugin {
         });
 
         handler.<Player>register("play", "Play game", (args, player) -> {
-            
+            nekoGameplay.showPlay(player);
         });
     }
 
@@ -43,6 +46,15 @@ public class NekoPlugin extends Plugin {
             NekoVars.shutdown();
             net.dispose();
             Core.app.exit();
+        });
+
+        handler.register("playersplay", "Show list player play game", args -> {
+            Log.info(" - List of all player playing - ");
+            gamemodeCore.getAllPlayers().forEach(uuid -> Log.info(uuid));
+        });
+
+        handler.register("teamstat", "Show team stat", args -> {
+            gamemodeCore.printTeamStat();
         });
     }
 

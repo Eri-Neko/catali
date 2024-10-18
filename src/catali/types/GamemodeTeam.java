@@ -3,6 +3,7 @@ package catali.types;
 import java.util.HashSet;
 import java.util.Set;
 
+import mindustry.content.UnitTypes;
 import mindustry.type.UnitType;
 
 public class GamemodeTeam {
@@ -14,6 +15,7 @@ public class GamemodeTeam {
 
     public GamemodeTeam(String uuid) {
         leaderUuid = uuid;
+        units.add(UnitTypes.poly);
     }
 
     // players function

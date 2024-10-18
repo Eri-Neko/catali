@@ -1,8 +1,8 @@
-package catali.mindustry;
+package catali.mindustry.service;
 
 import catali.NekoPlugin;
-import catali.mindustry.InfoDisplay.DisplayPack;
-import catali.mindustry.InfoDisplay.InfoDisplayRunnable;
+import catali.mindustry.InfoDisplay.types.DisplayPack;
+import catali.mindustry.InfoDisplay.types.InfoDisplayRunnable;
 import mindustry.gen.Player;
 
 import static catali.NekoVars.*;

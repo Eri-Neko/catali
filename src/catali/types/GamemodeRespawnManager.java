@@ -40,6 +40,8 @@ public class GamemodeRespawnManager {
 
     // Xóa người chơi khỏi hàng chờ hồi sinh (dù họ đang chờ hay không)
     public void removePlayerFromRespawn(String uuid) {
+        updateRespawnQueue(); // Tự động cập nhật hàng chờ
+
         respawnQueue.remove(uuid);
     }
 

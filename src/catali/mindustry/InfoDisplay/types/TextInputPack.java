@@ -1,4 +1,4 @@
-package catali.mindustry.InfoDisplay;
+package catali.mindustry.InfoDisplay.types;
 
 public class TextInputPack {
     public final int id;

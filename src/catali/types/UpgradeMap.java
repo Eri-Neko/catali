@@ -13,7 +13,6 @@ public class UpgradeMap {
         upgradeCountMap.put("Increase_Heal", 0);
     }
 
-    //
     public void addMaxHpUpgrade(int amount) {
         upgradeCountMap.put("Increase_Max_HP", upgradeCountMap.get("Increase_Max_HP") + amount);
     }
@@ -47,6 +46,6 @@ public class UpgradeMap {
     }
 
     public Map<String, Integer> getAllUpgradeCounts() {
-        return new HashMap<>(upgradeCountMap); // Trả về một bản sao của map để bảo toàn dữ liệu
+        return new HashMap<>(upgradeCountMap); 
     }
 }
