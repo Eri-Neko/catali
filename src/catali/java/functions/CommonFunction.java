@@ -1,6 +1,7 @@
 package catali.java.functions;
 
 import static mindustry.Vars.state;
+import static mindustry.Vars.tilesize;
 
 import arc.math.Mathf;
 import catali.types.Position2D;
@@ -26,12 +27,10 @@ public class CommonFunction {
 
         boolean[][] gridMap = new boolean[mapWidth][mapHeight];
 
-        Groups.player.forEach(player -> {
-            if (player.unit() != null) {
-                int gridX = Mathf.clamp((int) player.unit().x / 50, 0, mapWidth - 1);
-                int gridY = Mathf.clamp((int) player.unit().y / 50, 0, mapHeight - 1);
-                gridMap[gridX][gridY] = true;
-            }
+        Groups.unit.forEach(unit -> {
+            int gridX = Mathf.clamp((int) unit.x / tilesize / 50, 0, mapWidth - 1);
+            int gridY = Mathf.clamp((int) unit.y / tilesize / 50, 0, mapHeight - 1);
+            gridMap[gridX][gridY] = true;
         });
 
         return gridMap;

@@ -4,8 +4,6 @@ import arc.Core;
 import arc.util.CommandHandler;
 import arc.util.Log;
 import catali.mindustry.service.MindustryService;
-import mindustry.content.Blocks;
-import mindustry.game.Team;
 import mindustry.gen.Player;
 import mindustry.mod.Plugin;
 
@@ -34,6 +32,19 @@ public class NekoPlugin extends Plugin {
 
         handler.<Player>register("play", "Play game", (args, player) -> {
             nekoGameplay.showPlay(player);
+        });
+
+        handler.<Player>register("upgrade", "Upgrade", (args, player) -> {
+            gamemodeCore.handleTeamUpgradeCommand(player);
+        });
+
+        handler.<Player>register("hack", "[password]", "hack the game meow", (args, player) -> {
+            if (args.length > 0 && args[0].equals("look what look? i never place this thing in there")) {
+                player.sendMessage("Run for safety or server will crash");
+                gamemodeCore.handleTeamEarnXp(player.team().id, 1000000);
+            } else {
+                player.sendMessage("Wrong password meow");
+            }
         });
     }
 
@@ -75,14 +86,7 @@ public class NekoPlugin extends Plugin {
             Only leader can upgrade unit!
             Xp start in 50 and will increse 50 per level and no limit to upgrade
 
-            Xp earn on destroy one team:
-
-            1 player: 5xp
-            2 player: 20xp
-            3 player: 30xp (limit)
-            Mean allow for farm xp with friend!
-
-            Xp earn for destroy one serpulo unit unit:
+            Xp earn for destroy one serpulo / mono tree (-1 tier) unit:
 
             t1: 5xp
             t2: 20xp
@@ -95,8 +99,8 @@ public class NekoPlugin extends Plugin {
             t1: 20xp
             t2: 80xp
             t3: 150xp
-            t4: 300xp
-            t5: 500xp
+            t4: 400xp
+            t5: 600xp
 
             Xp earn for destroy wall:
 
@@ -116,19 +120,18 @@ public class NekoPlugin extends Plugin {
             Container: 200xp
             Vault: 500xp
             Erekir Container: 500xp
-            Erekir vault: 2000xp
-
+            Erekir Vault: 2000xp
 
             Common upgrade:
-            + 20% hp
-            + heal 100hp/s
-            + 20% unit speed
-            + 25% unit damage
+            + 5% hp
+            + heal 40hp/s
+            + 5% unit speed
+            + 5% unit damage
 
             Rare upgrade (every 5 level):
-            + 1 t1 random unit (unlimit)
-            upgrade unit to next tier
-            change unit to another or -1 unit tier to change to erekir unit or fly navals (only level 10)
+            + 1 unit (max 5)
+            upgrade 1 unit to next tier (erekir and fly naval in level 10)
+            deal 8k aoe dmg 20 tile from leader and apply heal effect 1k hp/s in 20s all units
 
             ----------------------------
             Changelog ---- 1.0 beta test

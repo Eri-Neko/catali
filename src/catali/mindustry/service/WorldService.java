@@ -16,7 +16,7 @@ import static catali.NekoVars.*;
 
 public class WorldService {
     public static Player findPlayerWithUUid(String uuid) {
-        return Groups.player.find(p -> p.uuid() == uuid);
+        return Groups.player.find(p -> p.uuid().equals(uuid));
     }
 
     public static void changeTeamForPlayer(String uuid, Team team) {
@@ -41,7 +41,7 @@ public class WorldService {
                 logic.play();
             }
 
-            state.rules = map.applyRules(Gamemode.sandbox);
+            state.rules = map.applyRules(Gamemode.pvp);
             state.rules.pvpAutoPause = false;
             state.rules.canGameOver = false;
             Log.info("Map loaded. Map name: @", map.plainName());
@@ -54,6 +54,7 @@ public class WorldService {
 
     public static Unit spawnUnit(UnitType unitType, int teamId, int x, int y) {
         if (mapControl.isGame()) {
+            unitType.flying = true;
             Unit unit = unitType.spawn(0, 0);
             unit.team(Team.get(teamId));
             unit.set(x * tilesize, y * tilesize);

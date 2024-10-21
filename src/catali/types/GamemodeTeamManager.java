@@ -5,13 +5,16 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import catali.mindustry.service.WorldService;
+import mindustry.gen.Player;
+
 // Chat GPT 100%
 public class GamemodeTeamManager {
     private final Map<Integer, GamemodeTeam> teams = new HashMap<>();
     private final Map<String, Integer> playerTeamMap = new HashMap<>(); // Lưu UUID của player với teamId
     private final Map<String, Integer> leaderTeamMap = new HashMap<>(); // Lưu UUID của player với teamId
     private final Set<String> players = new HashSet<>(); // Lưu danh sách các player đang chơi
-    
+
     // Get all player
     public Set<String> getAllPlayers() {
         return new HashSet<>(players);
@@ -21,6 +24,7 @@ public class GamemodeTeamManager {
     public void addTeam(int teamId, GamemodeTeam team) {
         teams.put(teamId, team);
         leaderTeamMap.put(team.getLeader(), teamId);
+        players.addAll(team.getAllPlayers());
     }
 
     // Xóa một team theo teamId
@@ -29,6 +33,7 @@ public class GamemodeTeamManager {
         if (team != null) {
             team.getAllPlayers().forEach(playerTeamMap::remove); // Xóa các player khỏi map
             leaderTeamMap.remove(team.getLeader());
+            players.removeAll(team.getAllPlayers());
         }
     }
 
@@ -74,11 +79,6 @@ public class GamemodeTeamManager {
         return leaderTeamMap.get(uuid);
     }
 
-    // Kiểm tra nếu player đang ở trong team
-    public boolean isPlayerInTeam(String uuid) {
-        return playerTeamMap.containsKey(uuid);
-    }
-
     // Lấy tất cả các player trong một team
     public Set<String> getPlayersInTeam(int teamId) {
         GamemodeTeam team = teams.get(teamId);
@@ -90,11 +90,31 @@ public class GamemodeTeamManager {
 
     // Trả về toàn bộ teamId cùng với team thực tế
     public Map<Integer, GamemodeTeam> getAllTeams() {
-        return teams; 
+        return teams;
     }
 
     // Kiểm tra xem một player có đang chơi hay không
     public boolean isPlayerPlaying(String uuid) {
         return players.contains(uuid);
     }
+
+    // Leaderboard cây chatgpt lá vườn
+    public String getLeaderboard() {
+        StringBuilder string = new StringBuilder();
+        string.append("--- Leaderboard ---\n");
+        teams.entrySet()
+                .stream()
+                .sorted((e1, e2) -> Integer.compare(e2.getValue().getLevel(), e1.getValue().getLevel()))
+                .limit(3)
+                .forEachOrdered(entry -> {
+                    GamemodeTeam team = entry.getValue();
+                    Player leader = WorldService.findPlayerWithUUid(team.getLeader());
+                    String leaderName = leader != null ? leader.name : "error";
+                    string.append(leaderName).append("[][][][][][][][][][][][][][][] - Lv ")
+                            .append(team.getLevel()).append("\n");
+                });
+
+        return string.toString();
+    }
+
 }

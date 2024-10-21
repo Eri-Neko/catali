@@ -1,7 +1,6 @@
 package catali.types;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 import mindustry.content.UnitTypes;
 import mindustry.type.UnitType;
@@ -9,7 +8,7 @@ import mindustry.type.UnitType;
 public class GamemodeTeam {
     private final String leaderUuid;
     private final Set<String> teammateUUids = new HashSet<>();
-    private final Set<UnitType> units = new HashSet<>();
+    private final List<UnitType> units = new ArrayList<>();
     private final UpgradeMap commonUpgrade = new UpgradeMap();
     private final GamemodeXp xp = new GamemodeXp();
 
@@ -50,7 +49,7 @@ public class GamemodeTeam {
         units.remove(unit);
     }
 
-    public Set<UnitType> getAvalableUnits() {
+    public List<UnitType> getAvalableUnits() {
         return units;
     }
 
@@ -60,8 +59,18 @@ public class GamemodeTeam {
     }
 
     // xp function
-    public boolean earnExp(int amout) {
-        return xp.earnXp(amout);
+    public void earnExp(int amout) {
+        if (xp.earnXp(amout)) {
+            xp.upgrade(this);
+        }     
+    }
+
+    public boolean isAvalableUpgrade() {
+        return xp.isAvalabeUpgrade();
+    }
+
+    public void upgrade() {
+        xp.upgrade(this);
     }
 
     public int getLevel() {

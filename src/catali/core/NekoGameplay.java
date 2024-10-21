@@ -7,6 +7,7 @@ import mindustry.game.EventType.BuildingBulletDestroyEvent;
 import mindustry.game.EventType.PlayerJoin;
 import mindustry.game.EventType.PlayerLeave;
 import mindustry.game.EventType.UnitBulletDestroyEvent;
+import mindustry.game.EventType.UnitDestroyEvent;
 import mindustry.gen.Building;
 import mindustry.gen.Call;
 import mindustry.gen.Player;
@@ -31,14 +32,15 @@ public class NekoGameplay {
         Events.on(PlayerJoin.class, event -> handlePlayerJoin(event.player));
         Events.on(PlayerLeave.class, event -> handlePlayerLeave(event.player));
         Events.on(BuildingBulletDestroyEvent.class, event -> handleBuildingDestroy(event.build, event.bullet.team.id));
-        Events.on(UnitBulletDestroyEvent.class, event -> handleUnitDestroy(event.bullet.team.id, event.unit));
+        Events.on(UnitBulletDestroyEvent.class, event -> handleUnitDestroyByBullet(event.bullet.team.id, event.unit));
+        Events.on(UnitDestroyEvent.class, event -> handleUnitDestroy(event.unit));
     }
 
     public void handlePlayerJoin(Player player) {
-        if (mapControl.isGame()) {
+        gamemodeCore.handlePlayerJoin(player);
+        if (mapControl.isGame() & !gamemodeCore.isPlayerPlaying(player.uuid())) {
             MindustryService.showJoin(player);
             showPlay(player);
-            gamemodeCore.handlePlayerJoin(player);
         }
     }
     
@@ -60,12 +62,18 @@ public class NekoGameplay {
         }
     }
 
-    public void handleUnitDestroy(int killerTeamId, Unit destroyTarget) {
+    public void handleUnitDestroyByBullet(int killerTeamId, Unit destroyTarget) {
         if (mapControl.isGame()) {
             gamemodeCore.handleUnitDestroy(killerTeamId, destroyTarget);
         }
     }
 
+    public void handleUnitDestroy(Unit unit) {
+        if (mapControl.isGame()) {
+            gamemodeCore.handleUnitDestroyEvent(unit);
+        }
+    }
+ 
     // another service
     public void showPlay(Player player) {
         if (gamemodeCore.isPlayerPlaying(player.uuid())) {
