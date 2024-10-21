@@ -1,10 +1,10 @@
-package catali.singeton;
+package catali.mindustry.world;
 
 import static mindustry.Vars.netServer;
 import static mindustry.Vars.state;
 
 import arc.util.Log;
-import catali.mindustry.WorldService;
+import catali.mindustry.service.WorldService;
 import mindustry.core.GameState.State;
 
 public class MapControl {

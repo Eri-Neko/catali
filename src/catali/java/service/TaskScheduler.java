@@ -1,4 +1,4 @@
-package catali.java;
+package catali.java.service;
 
 import java.util.concurrent.*;
 import java.util.Map;
@@ -50,7 +50,6 @@ public class TaskScheduler {
             if (!scheduler.awaitTermination(1, TimeUnit.SECONDS)) {
                 scheduler.shutdownNow();
             }
-            System.out.println("Scheduler shutdown complete.");
         } catch (InterruptedException e) {
             scheduler.shutdownNow();
         }

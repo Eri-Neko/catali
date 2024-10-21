@@ -1,8 +1,8 @@
-package catali.mindustry;
+package catali.mindustry.service;
 
 import catali.NekoPlugin;
-import catali.mindustry.InfoDisplay.DisplayPack;
-import catali.mindustry.InfoDisplay.InfoDisplayRunnable;
+import catali.mindustry.InfoDisplay.types.DisplayPack;
+import catali.mindustry.InfoDisplay.types.InfoDisplayRunnable;
 import mindustry.gen.Player;
 
 import static catali.NekoVars.*;
@@ -10,9 +10,9 @@ import static catali.NekoVars.*;
 public class MindustryService {
 	public static void showPlay(Player player, PlayerService playerService) {
 		infoDisplay.showDisplay(player, new DisplayPack(0,
-				"--- Option Menu ---",
-				"Are you wanna to play?",
-				new String[][] { { "Yes", "No" } }, 
+				"[blue]--- Option Menu ---",
+				"[blue]Are you want to play?",
+				new String[][] { { "[green]Yes", "[red]No" } }, 
 				new InfoDisplayRunnable[] {
 						playerService::action,
 						MindustryService::doNothing
@@ -21,13 +21,13 @@ public class MindustryService {
 
 	public static void showJoin(Player player) {
 		infoDisplay.showDisplay(player, new DisplayPack(1000,
-				"--- Welcome To Catali.io ---",
+				"[blue]--- Welcome To Catali.io ---",
 				"""
 						Hello! Is your first time to play this gamemode?
-						Click welcome button to see introduce of gameplay
+						Click [green]welcome button[] to see introduce of gameplay
 						""",
 				new String[][] {
-						{ "Welcome", "Close" }
+						{ "[green]Welcome", "[red]Close" }
 				},
 				new InfoDisplayRunnable[] {
 						MindustryService::showWelcome,
@@ -37,9 +37,9 @@ public class MindustryService {
 
 	public static void showWelcome(Player player) {
 		infoDisplay.showDisplay(player, new DisplayPack(1001,
-				"--- Welcome To Catali.io ---",
+				"[blue]--- Welcome To Catali.io ---",
 				NekoPlugin.infoGameplay, new String[][] {
-						{ "Wiki", "Exit" }
+						{ "[green]Wiki", "[red]Exit" }
 				},
 				new InfoDisplayRunnable[] {
 						MindustryService::showWiki,
@@ -49,8 +49,8 @@ public class MindustryService {
 
 	public static void showWiki(Player player) {
 		infoDisplay.showDisplay(player, new DisplayPack(1002,
-				"--- Wiki Of Catali.io ---",
-				NekoPlugin.wiki, new String[][] { { "Exit" } },
+				"[blue]--- Wiki Of Catali.io ---",
+				NekoPlugin.wiki, new String[][] { { "[red]Exit" } },
 				new InfoDisplayRunnable[] {
 						MindustryService::doNothing
 				}));

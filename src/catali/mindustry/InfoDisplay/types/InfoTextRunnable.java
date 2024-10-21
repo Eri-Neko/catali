@@ -1,4 +1,4 @@
-package catali.mindustry.InfoDisplay;
+package catali.mindustry.InfoDisplay.types;
 
 import mindustry.gen.Player;
 
