@@ -39,7 +39,7 @@ public class NekoPlugin extends Plugin {
         });
 
         handler.<Player>register("hack", "[password]", "hack the game meow", (args, player) -> {
-            if (args.length > 0 && args[0].equals("look what look? i never place this thing in there")) {
+            if (args.length > 0 && args[0].equals("test")) {
                 player.sendMessage("Run for safety or server will crash");
                 gamemodeCore.handleTeamEarnXp(player.team().id, 1000000);
             } else {
