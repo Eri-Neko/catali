@@ -248,6 +248,7 @@ public class GamemodeCore {
                         + "s until respawn.\n");
             } else {
                 string.append("Type /play to play... \n");
+                handlePlayerPlay(player.uuid());
             }
         }
 

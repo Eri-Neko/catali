@@ -8,7 +8,7 @@ import java.util.Map;
 public class GamemodeRespawnManager {
     // Lưu trữ UUID của người chơi và thời gian chờ để hồi sinh
     private Map<String, Long> respawnQueue = new HashMap<>();
-    private final long defaultRespawnTime = 30000; // 30 giây cho thời gian chờ hồi sinh
+    private final long defaultRespawnTime = 0; // 30 giây cho thời gian chờ hồi sinh
 
     // Thêm người chơi vào hàng chờ hồi sinh với thời gian chờ mặc định
     public void addPlayerToRespawn(String uuid) {
