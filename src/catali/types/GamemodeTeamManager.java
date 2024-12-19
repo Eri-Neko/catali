@@ -22,6 +22,7 @@ public class GamemodeTeamManager {
 
     // Thêm một team mới với teamId
     public void addTeam(int teamId, GamemodeTeam team) {
+        Log.info(team);
         teams.put(teamId, team);
         leaderTeamMap.put(team.getLeader(), teamId);
         players.addAll(team.getAllPlayers());
