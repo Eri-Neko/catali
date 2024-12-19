@@ -55,7 +55,7 @@ public class WorldService {
     public static Unit spawnUnit(UnitType unitType, int teamId, int x, int y) {
         if (mapControl.isGame()) {
             unitType.flying = true;
-            Unit unit = unitType.spawn(0, 0);
+            Unit unit = unitType.spawn(x, y);
             unit.team(Team.get(teamId));
             unit.set(x * tilesize, y * tilesize);
             return unit;
