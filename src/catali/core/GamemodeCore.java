@@ -169,7 +169,7 @@ public class GamemodeCore {
     }
 
     public void handleTeamEarnXp(int teamId, int amount) {
-        Log.info(getTeam(teamId));
+        Log.info(teams.getTeam(teamId));
         player.sendMessage(teams.getTeam(teamId));
         teams.getTeam(teamId).earnExp(amount);
     }
