@@ -7,7 +7,6 @@ import static catali.NekoVars.*;
 
 import java.util.Set;
 import java.util.Random;
-import arc.util.Log;
 
 import arc.util.Log;
 import arc.util.Timer;
@@ -170,7 +169,7 @@ public class GamemodeCore {
     }
 
     public void handleTeamEarnXp(int teamId, int amount) {
-        Log.getTeam(teamId));
+        player.sendMessage(teams.getTeam(teamId));
         teams.getTeam(teamId).earnExp(amount);
     }
 
