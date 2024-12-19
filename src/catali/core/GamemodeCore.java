@@ -141,8 +141,8 @@ public class GamemodeCore {
             player.sendMessage("Error. Please try again. (Debug message: Team ID already exists.)");
         } else {
             player.team(Team.all[teamId]);
-            player.sendMessage("team id: " + teamId);
             teams.addTeam(teamId, new GamemodeTeam(player.uuid()));
+            player.sendMessage("teams: " + teams);
             Call.unitControl(player, WorldService.spawnUnit(UnitTypes.poly, teamId, pos.x, pos.y));
             Call.setCameraPosition(player.con, pos.x * tilesize, pos.y * tilesize);
             player.sendMessage("You have spawned in: " + pos.x + ", " + pos.y);
@@ -169,6 +169,7 @@ public class GamemodeCore {
     }
 
     public void handleTeamEarnXp(int teamId, int amount) {
+        Log(teams.getTeam(teamId));
         teams.getTeam(teamId).earnExp(amount);
     }
 
@@ -249,7 +250,6 @@ public class GamemodeCore {
                         + "s until respawn.\n");
             } else {
                 string.append("Type /play to play... \n");
-                handlePlayerPlay(player.uuid());
             }
         }
 
