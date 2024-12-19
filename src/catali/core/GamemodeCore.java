@@ -141,6 +141,7 @@ public class GamemodeCore {
             player.sendMessage("Error. Please try again. (Debug message: Team ID already exists.)");
         } else {
             player.team(Team.all[teamId]);
+            player.sendMessage("team id: " + teamId);
             teams.addTeam(teamId, new GamemodeTeam(player.uuid()));
             Call.unitControl(player, WorldService.spawnUnit(UnitTypes.poly, teamId, pos.x, pos.y));
             Call.setCameraPosition(player.con, pos.x * tilesize, pos.y * tilesize);
