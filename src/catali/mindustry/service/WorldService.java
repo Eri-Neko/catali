@@ -58,6 +58,7 @@ public class WorldService {
             Unit unit = unitType.spawn(0, 0);
             unit.team(Team.get(teamId));
             unit.set(x * tilesize, y * tilesize);
+            Log.info(unit);
             return unit;
         } else
             return null;
