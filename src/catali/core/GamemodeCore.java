@@ -141,6 +141,7 @@ public class GamemodeCore {
             player.sendMessage("Error. Please try again. (Debug message: Team ID already exists.)");
         } else {
             player.team(Team.all[teamId]);
+            Log.info("p teams: " + Team.all[teamId]);
             teams.addTeam(teamId, new GamemodeTeam(player.uuid()));
             Log.info("teams: " + teams);
             Call.unitControl(player, WorldService.spawnUnit(UnitTypes.poly, teamId, pos.x, pos.y));
