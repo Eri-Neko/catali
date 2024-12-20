@@ -235,7 +235,7 @@ public class GamemodeCore {
 
     public void handleSpawnRandomUnit(Position2D pos, boolean isPlayerLowLevel) {
         int isSpawn = random.nextInt(100);
-        if (isSpawn < 50){
+        if (isSpawn < 50 && isPlayerLowLevel != true){
             Unit unit = WorldService.spawnEUnit(UnitTypes.crawler, Math.min(Math.max(pos.x + randomNumber(50), 4), state.map.width - 4),
                 Math.min(Math.max(pos.y + randomNumber(50), 4), state.map.height - 4));
             StatusEffect effect = StatusEffects.none;
