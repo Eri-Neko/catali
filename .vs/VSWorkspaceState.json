@@ -1,7 +1,12 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\src",
+    "\\src\\catali",
+    "\\src\\catali\\core",
+    "\\src\\catali\\mindustry",
+    "\\src\\catali\\mindustry\\service"
   ],
-  "SelectedNode": "\\C:\\Users\\asus\\Source\\Repos\\catali",
+  "SelectedNode": "\\src\\catali\\mindustry\\service\\WorldService.java",
   "PreviewInSolutionExplorer": false
 }

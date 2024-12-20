@@ -187,6 +187,20 @@ public class GamemodeCore {
         }
     }
 
+    public void handleTeamRefund(int teamId) {
+        teams.getTeam(teamId).refund();
+    }
+
+    public void handleTeamRefundCommand(Player player) {
+        Integer team = teams.getTeamIdByLeaderUuid(player.uuid());
+
+        if (team != null) {
+            handleTeamRefund(team);
+        } else {
+            player.sendMessage("You are not the leader/ not playing!");
+        }
+    }
+
     // 4. Game Event Action handlers
     public void handleBuildingDestroy(Building building, int teamId) {
         if (teams.getTeam(teamId) != null) {

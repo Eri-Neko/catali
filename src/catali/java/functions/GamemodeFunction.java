@@ -241,6 +241,144 @@ public class GamemodeFunction {
         return units;
     }
 
+    public static Set<UnitType> getPrevTier(String lastUnitName) {
+        Set<UnitType> units = new HashSet<>();
+
+        switch (lastUnitName) {
+            case "dagger":
+                units.add(poly);
+                break;
+            case "mace":
+                units.add(dagger);
+                break;
+            case "fortress":
+                units.add(mace);
+                break;
+            case "scepter":
+                units.add(fortress);
+                break;
+            case "reign":
+                units.add(scepter);
+                break;
+            case "nova":
+                units.add(poly);
+                break;
+            case "pulsar":
+                units.add(nova);
+                break;
+            case "quasar":
+                units.add(pulsar);
+                break;
+            case "vela":
+                units.add(quasar);
+                break;
+            case "corvus":
+                units.add(vela);
+                break;
+            case "flare":
+                units.add(poly);
+                break;
+            case "horizon":
+                units.add(flare);
+                break;
+            case "zenith":
+                units.add(horizon);
+                break;
+            case "antumbra":
+                units.add(zenith);
+                break;
+            case "eclipse":
+                units.add(antumbra);
+                break;
+            case "mega":
+                units.add(poly);
+                break;
+            case "quad":
+                units.add(mega);
+                break;
+            case "oct":
+                units.add(quad);
+                break;
+            case "risso":
+                units.add(flare);
+                break;
+            case "minke":
+                units.add(risso);
+                break;
+            case "bryde":
+                units.add(minke);
+                break;
+            case "sei":
+                units.add(bryde);
+                break;
+            case "omura":
+                units.add(sei);
+                break;
+            case "retusa":
+                units.add(flare);
+                break;
+            case "oxynoe":
+                units.add(retusa);
+                break;
+            case "cyerce":
+                units.add(oxynoe);
+                break;
+            case "aegires":
+                units.add(cyerce);
+                break;
+            case "navanax":
+                units.add(aegires);
+                break;
+            case "stell":
+                units.add(flare);
+                break;
+            case "locus":
+                units.add(stell);
+                break;
+            case "precept":
+                units.add(locus);
+                break;
+            case "vanquish":
+                units.add(precept);
+                break;
+            case "conquer":
+                units.add(vanquish);
+                break;
+            case "merui":
+                units.add(flare);
+                break;
+            case "cleroi":
+                units.add(merui);
+                break;
+            case "anthicus":
+                units.add(cleroi);
+                break;
+            case "tecta":
+                units.add(anthicus);
+                break;
+            case "collaris":
+                units.add(tecta);
+                break;
+            case "elude":
+                units.add(flare);
+                break;
+            case "avert":
+                units.add(elude);
+                break;
+            case "obviate":
+                units.add(avert);
+                break;
+            case "quell":
+                units.add(obviate);
+                break;
+            case "disrupt":
+                units.add(quell);
+                break;
+        }
+
+        return units;
+    }
+
     public static int getRandomValue(Map<Integer, Double> map, int defaultValue) {
         Random random = new Random();
         double totalProbability = map.values().stream().mapToDouble(Double::doubleValue).sum();

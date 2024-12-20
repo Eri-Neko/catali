@@ -38,6 +38,10 @@ public class NekoPlugin extends Plugin {
             gamemodeCore.handleTeamUpgradeCommand(player);
         });
 
+        handler.<Player>register("refund", "Refund", (args, player) -> {
+            gamemodeCore.handleTeamRefundCommand(player);
+        });
+
         handler.<Player>register("hack", "[password]", "hack the game meow", (args, player) -> {
             if (args.length > 0 && args[0].equals("test")) {
                 player.sendMessage("Run for safety or server will crash");

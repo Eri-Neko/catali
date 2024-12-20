@@ -73,6 +73,10 @@ public class GamemodeTeam {
         xp.upgrade(this);
     }
 
+    public void refund() {
+        xp.refund(this);
+    }
+
     public int getLevel() {
         return xp.getLevel();
     }

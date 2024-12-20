@@ -181,6 +181,72 @@ public class GamemodeXp {
         }
     }
 
+    public void refund(GamemodeTeam team) {
+    Player leader = Groups.player.find(player -> player.uuid() == team.getLeader());
+
+    if (leader != null) {
+        if (isAvalabeRefund()) {
+            String[][] options = new String[team.getAvalableUnits().size() + 1][];
+            InfoDisplayRunnable[] actions = new InfoDisplayRunnable[team.getAvalableUnits()
+                .size() + 1];
+            int counter = 0;
+
+            for (UnitType unit: team.getAvalableUnits()) {
+                options[counter] = new String[] {
+                    unit.name
+                };
+                actions[counter] = p -> {
+                    Set < UnitType > avalableUnits = GamemodeFunction.getPrevTier(unit.name);
+
+                    if (avalableUnits.size() > 0) {
+
+                        String[][] chooseOptions = new String[avalableUnits.size() + 1][];
+                        InfoDisplayRunnable[] chooseResult = new InfoDisplayRunnable[avalableUnits
+                            .size() + 1];
+                        int count = 0;
+                        for (UnitType avalableUnit: avalableUnits) {
+                            Unit destroyTarget = Groups.unit.find(
+                                u -> u.team.id == pl.team().id && u.type == unit);
+
+                            Unit newUnit = WorldService.spawnUnit(avalableUnit,
+                                pl.team().id,
+                                40, 40);
+
+                            if (destroyTarget != null && pl.unit().id == destroyTarget.id) {
+                                Call.unitControl(pl, newUnit);
+                            }
+
+                            team.addUnit(avalableUnit);
+                            team.removeUnit(unit);
+
+                            if (destroyTarget != null) {
+                                destroyTarget.destroy();
+                            }
+                            finishRefund(team);
+
+                            count++;
+                        };
+                    }
+                };
+
+                counter++;
+            };
+            options[counter] = new String[] {
+                "Cancel"
+            };
+            actions[counter] = p -> {
+                MindustryService::doNothing
+            };
+
+            infoDisplay.showDisplay(player, new DisplayPack(12,
+                "--- Choose Unit For Upgrade ---",
+                "Please choose unit for upgrade", options, actions));
+        } else {
+            leader.sendMessage("You not have enough upgrade for refund");
+        }
+    }
+}
+
     public void finishUpgrade(GamemodeTeam team) {
         upgrade--;
         upgraded++;
@@ -189,8 +255,17 @@ public class GamemodeXp {
         }
     }
 
+    public void finishRefund(GamemodeTeam team) {
+        upgrade++;
+        upgraded--;
+    }
+
     public boolean isAvalabeUpgrade() {
         return upgrade > 0 ? true : false;
+    }
+
+    public boolean isAvalabeRefund() {
+        return upgraded > 0 ? true : false;
     }
 
     private double getXpMultiplier() {

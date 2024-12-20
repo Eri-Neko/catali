@@ -1,7 +1,40 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\asus\\source\\repos\\catali\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\asus\\source\\repos\\catali\\src\\catali\\mindustry\\service\\WorldService.java||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\catali\\mindustry\\service\\WorldService.java||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\asus\\source\\repos\\catali\\src\\catali\\core\\GamemodeCore.java||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\catali\\core\\GamemodeCore.java||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\asus\\source\\repos\\catali\\src\\catali\\NekoPlugin.java||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\catali\\NekoPlugin.java||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\asus\\source\\repos\\catali\\src\\catali\\core\\NekoGameplay.java||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\catali\\core\\NekoGameplay.java||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\asus\\source\\repos\\catali\\src\\catali\\types\\GamemodeTeamManager.java||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\catali\\types\\GamemodeTeamManager.java||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\asus\\source\\repos\\catali\\src\\catali\\types\\GamemodeTeam.java||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\catali\\types\\GamemodeTeam.java||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\asus\\source\\repos\\catali\\src\\catali\\types\\GamemodeXp.java||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\catali\\types\\GamemodeXp.java||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\asus\\source\\repos\\catali\\src\\catali\\NekoVars.java||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\catali\\NekoVars.java||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,7 +42,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 6,
           "Children": [
             {
               "$type": "Bookmark",
@@ -34,6 +67,114 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{40ea2e6b-2121-4bb8-a43e-c83c04b51041}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "WorldService.java",
+              "DocumentMoniker": "C:\\Users\\asus\\source\\repos\\catali\\src\\catali\\mindustry\\service\\WorldService.java",
+              "RelativeDocumentMoniker": "src\\catali\\mindustry\\service\\WorldService.java",
+              "ToolTip": "C:\\Users\\asus\\source\\repos\\catali\\src\\catali\\mindustry\\service\\WorldService.java",
+              "RelativeToolTip": "src\\catali\\mindustry\\service\\WorldService.java",
+              "ViewState": "AgIAACcAAAAAAAAAAAAAADsAAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001630|",
+              "WhenOpened": "2024-12-19T14:18:39.058Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "GamemodeTeam.java",
+              "DocumentMoniker": "C:\\Users\\asus\\source\\repos\\catali\\src\\catali\\types\\GamemodeTeam.java",
+              "RelativeDocumentMoniker": "src\\catali\\types\\GamemodeTeam.java",
+              "ToolTip": "C:\\Users\\asus\\source\\repos\\catali\\src\\catali\\types\\GamemodeTeam.java",
+              "RelativeToolTip": "src\\catali\\types\\GamemodeTeam.java",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001630|",
+              "WhenOpened": "2024-12-19T14:02:05.167Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "GamemodeTeamManager.java",
+              "DocumentMoniker": "C:\\Users\\asus\\source\\repos\\catali\\src\\catali\\types\\GamemodeTeamManager.java",
+              "RelativeDocumentMoniker": "src\\catali\\types\\GamemodeTeamManager.java",
+              "ToolTip": "C:\\Users\\asus\\source\\repos\\catali\\src\\catali\\types\\GamemodeTeamManager.java",
+              "RelativeToolTip": "src\\catali\\types\\GamemodeTeamManager.java",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAADAAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001630|",
+              "WhenOpened": "2024-12-19T14:03:49.959Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "GamemodeCore.java",
+              "DocumentMoniker": "C:\\Users\\asus\\source\\repos\\catali\\src\\catali\\core\\GamemodeCore.java",
+              "RelativeDocumentMoniker": "src\\catali\\core\\GamemodeCore.java",
+              "ToolTip": "C:\\Users\\asus\\source\\repos\\catali\\src\\catali\\core\\GamemodeCore.java",
+              "RelativeToolTip": "src\\catali\\core\\GamemodeCore.java",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAAAJEAAAA5AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001630|",
+              "WhenOpened": "2024-12-19T13:41:36.079Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "NekoPlugin.java",
+              "DocumentMoniker": "C:\\Users\\asus\\source\\repos\\catali\\src\\catali\\NekoPlugin.java",
+              "RelativeDocumentMoniker": "src\\catali\\NekoPlugin.java",
+              "ToolTip": "C:\\Users\\asus\\source\\repos\\catali\\src\\catali\\NekoPlugin.java",
+              "RelativeToolTip": "src\\catali\\NekoPlugin.java",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAACsAAABJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001630|",
+              "WhenOpened": "2024-12-19T13:41:00.273Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "NekoGameplay.java",
+              "DocumentMoniker": "C:\\Users\\asus\\source\\repos\\catali\\src\\catali\\core\\NekoGameplay.java",
+              "RelativeDocumentMoniker": "src\\catali\\core\\NekoGameplay.java",
+              "ToolTip": "C:\\Users\\asus\\source\\repos\\catali\\src\\catali\\core\\NekoGameplay.java",
+              "RelativeToolTip": "src\\catali\\core\\NekoGameplay.java",
+              "ViewState": "AgIAAC0AAAAAAAAAAAAAADYAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001630|",
+              "WhenOpened": "2024-12-19T13:40:30.034Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "GamemodeXp.java",
+              "DocumentMoniker": "C:\\Users\\asus\\source\\repos\\catali\\src\\catali\\types\\GamemodeXp.java",
+              "RelativeDocumentMoniker": "src\\catali\\types\\GamemodeXp.java",
+              "ToolTip": "C:\\Users\\asus\\source\\repos\\catali\\src\\catali\\types\\GamemodeXp.java",
+              "RelativeToolTip": "src\\catali\\types\\GamemodeXp.java",
+              "ViewState": "AgIAABoAAAAAAAAAAAAowDAAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001630|",
+              "WhenOpened": "2024-12-19T14:07:20.659Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "NekoVars.java",
+              "DocumentMoniker": "C:\\Users\\asus\\source\\repos\\catali\\src\\catali\\NekoVars.java",
+              "RelativeDocumentMoniker": "src\\catali\\NekoVars.java",
+              "ToolTip": "C:\\Users\\asus\\source\\repos\\catali\\src\\catali\\NekoVars.java",
+              "RelativeToolTip": "src\\catali\\NekoVars.java",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001630|",
+              "WhenOpened": "2024-12-19T13:40:59.441Z",
+              "EditorCaption": ""
             }
           ]
         }
