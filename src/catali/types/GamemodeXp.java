@@ -236,7 +236,7 @@ public class GamemodeXp {
             };
             actions[counter] = MindustryService::doNothing;
 
-            infoDisplay.showDisplay(player, new DisplayPack(14,
+            infoDisplay.showDisplay(leader, new DisplayPack(14,
                 "--- Choose Unit For Refund ---",
                 "Please choose unit for refund", options, actions));
         } else {
