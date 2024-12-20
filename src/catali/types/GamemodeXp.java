@@ -206,14 +206,14 @@ public class GamemodeXp {
                         int count = 0;
                         for (UnitType avalableUnit: avalableUnits) {
                             Unit destroyTarget = Groups.unit.find(
-                                u -> u.team.id == pl.team().id && u.type == unit);
+                                u -> u.team.id == p.team().id && u.type == unit);
 
                             Unit newUnit = WorldService.spawnUnit(avalableUnit,
-                                pl.team().id,
+                                p.team().id,
                                 40, 40);
 
-                            if (destroyTarget != null && pl.unit().id == destroyTarget.id) {
-                                Call.unitControl(pl, newUnit);
+                            if (destroyTarget != null && p.unit().id == destroyTarget.id) {
+                                Call.unitControl(p, newUnit);
                             }
 
                             team.addUnit(avalableUnit);
