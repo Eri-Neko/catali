@@ -275,7 +275,9 @@ public class GamemodeCore {
     }
 
     public boolean isPlayerPlaying(String uuid) {
-        return teams.isPlayerPlaying(uuid);
+        Integer playerId = teams.getTeamIdByPlayerUuid(player.uuid());
+        Unit unit = Groups.unit.find(u -> u.team.id == playerId && u.isPlayer());
+        return teams.isPlayerPlaying(uuid) && unit != null;
     }
 
     public int pickRandomizeTeam() {
