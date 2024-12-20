@@ -239,9 +239,9 @@ public class GamemodeCore {
             Unit unit = WorldService.spawnEUnit(UnitTypes.crawler, Math.min(Math.max(pos.x + randomNumber(50), 4), state.map.width - 4),
                 Math.min(Math.max(pos.y + randomNumber(50), 4), state.map.height - 4));
             StatusEffect effect = StatusEffects.none;
-            effect.healthMultiplier = (100 * 0.05f) + 1;
-            effect.speedMultiplier = (10 * 0.05f) + 1;
-            effect.damageMultiplier = (100 * 0.05f) + 1;
+            effect.healthMultiplier = 100;
+            effect.speedMultiplier = 10;
+            effect.damageMultiplier = 100;
             unit.apply(effect, 1.01f);
         }
     }
