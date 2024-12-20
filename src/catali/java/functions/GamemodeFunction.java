@@ -237,6 +237,8 @@ public class GamemodeFunction {
                 units.add(disrupt);
                 break;
         }
+        units.add(crawler);
+        units.add(scathe-missile);
 
         return units;
     }
