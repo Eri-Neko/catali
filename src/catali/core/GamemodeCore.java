@@ -84,6 +84,8 @@ public class GamemodeCore {
             if (unit.isPlayer() && teams.getTeamIdByLeaderUuid(unit.getPlayer().uuid()) != null) {
                 handleSpawnRandomBlock(new Position2D((int) unit.x / tilesize, (int) unit.y / tilesize),
                         teams.getTeam(unit.team.id).getLevel() < 20 ? true : false);
+                handleSpawnRandomUnit(new Position2D((int) unit.x / tilesize, (int) unit.y / tilesize),
+                        teams.getTeam(unit.team.id).getLevel() < 20 ? true : false);
             }
         });
     }
@@ -228,6 +230,19 @@ public class GamemodeCore {
                 Math.min(Math.max(pos.y + randomNumber(50), 4), state.map.height - 4));
         if (tile.build == null) {
             tile.setNet(Blocks.copperWall, Team.crux, 0);
+        }
+    }
+
+    public void handleSpawnRandomUnit(Position2D pos, boolean isPlayerLowLevel) {
+        int isSpawn = random.nextInt(100);
+        if (isSpawn < 50){
+            Unit unit = WorldService.spawnEUnit(UnitTypes.poly, Math.min(Math.max(pos.x + randomNumber(50), 4), state.map.width - 4),
+                Math.min(Math.max(pos.y + randomNumber(50), 4), state.map.height - 4));
+            StatusEffect effect = StatusEffects.none;
+            effect.healthMultiplier = (100 * 0.05f) + 1;
+            effect.speedMultiplier = (10 * 0.05f) + 1;
+            effect.damageMultiplier = (100 * 0.05f) + 1;
+            unit.apply(effect, 1.01f);
         }
     }
 

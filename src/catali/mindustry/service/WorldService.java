@@ -62,4 +62,15 @@ public class WorldService {
         } else
             return null;
     }
+
+    public static Unit spawnEUnit(UnitType unitType, int x, int y) {
+        if (mapControl.isGame()) {
+            unitType.flying = true;
+            Unit unit = unitType.spawn(x, y);
+            unit.team(Team.crux);
+            unit.set(x * tilesize, y * tilesize);
+            return unit;
+        } else
+            return null;
+    }
 }

@@ -68,6 +68,7 @@ public class GamemodeFunction {
             case "nova":
             case "flare":
             case "poly":
+            case "crawler":
                 return 5;
             case "mace":
             case "pulsar":
