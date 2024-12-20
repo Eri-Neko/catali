@@ -235,7 +235,7 @@ public class GamemodeXp {
                 "Cancel"
             };
             actions[counter] = p -> {
-                MindustryService::doNothing
+                MindustryService::doNothing;
             };
 
             infoDisplay.showDisplay(player, new DisplayPack(12,
