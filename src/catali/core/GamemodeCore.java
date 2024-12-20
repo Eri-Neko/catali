@@ -275,7 +275,7 @@ public class GamemodeCore {
     }
 
     public boolean isPlayerPlaying(String uuid) {
-        Integer playerId = teams.getTeamIdByPlayerUuid(player.uuid());
+        Integer playerId = teams.getTeamIdByPlayerUuid(uuid);
         Unit unit = Groups.unit.find(u -> u.team.id == playerId && u.isPlayer());
         return teams.isPlayerPlaying(uuid) && unit != null;
     }
