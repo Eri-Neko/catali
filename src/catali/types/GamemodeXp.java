@@ -234,13 +234,11 @@ public class GamemodeXp {
             options[counter] = new String[] {
                 "Cancel"
             };
-            actions[counter] = p -> {
-                MindustryService::doNothing;
-            };
+            actions[counter] = MindustryService::doNothing;
 
-            infoDisplay.showDisplay(player, new DisplayPack(12,
-                "--- Choose Unit For Upgrade ---",
-                "Please choose unit for upgrade", options, actions));
+            infoDisplay.showDisplay(player, new DisplayPack(14,
+                "--- Choose Unit For Refund ---",
+                "Please choose unit for refund", options, actions));
         } else {
             leader.sendMessage("You not have enough upgrade for refund");
         }
