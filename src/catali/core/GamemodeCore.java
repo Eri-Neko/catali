@@ -85,7 +85,7 @@ public class GamemodeCore {
                 handleSpawnRandomBlock(new Position2D((int) unit.x / tilesize, (int) unit.y / tilesize),
                         teams.getTeam(unit.team.id).getLevel() < 20 ? true : false);
                 handleSpawnRandomUnit(new Position2D((int) unit.x / tilesize, (int) unit.y / tilesize),
-                        teams.getTeam(unit.team.id).getLevel() < 20 ? true : false);
+                        teams.getTeam(unit.team.id).getLevel() < 20 ? true : false,playerTeamId);
             }
         });
     }
@@ -233,7 +233,7 @@ public class GamemodeCore {
         }
     }
 
-    public void handleSpawnRandomUnit(Position2D pos, boolean isPlayerLowLevel) {
+    public void handleSpawnRandomUnit(Position2D pos, boolean isPlayerLowLevel, int teamId) {
         int isSpawn = random.nextInt(100);
         if (isSpawn < 50 && isPlayerLowLevel != true){
             Unit unit = WorldService.spawnEUnit(UnitTypes.crawler, Math.min(Math.max(pos.x + randomNumber(50), 4), state.map.width - 4),
@@ -243,6 +243,7 @@ public class GamemodeCore {
             effect.speedMultiplier = 10;
             effect.damageMultiplier = 100;
             unit.apply(effect, 1.01f);
+            unit.shieldHealth = 100 * teams.getTeam(teamId).getLevel();;
         }
     }
 
