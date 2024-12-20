@@ -142,7 +142,6 @@ public class GamemodeCore {
         } else {
             player.team(Team.all[teamId]);
             teams.addTeam(teamId, new GamemodeTeam(player.uuid()));
-            Log.info("x: " + pos.x + "/y: " + pos.y);
             Call.unitControl(player, WorldService.spawnUnit(UnitTypes.poly, teamId, pos.x, pos.y));
             Call.setCameraPosition(player.con, pos.x * tilesize, pos.y * tilesize);
             player.sendMessage("You have spawned in: " + pos.x + ", " + pos.y);
@@ -169,7 +168,6 @@ public class GamemodeCore {
     }
 
     public void handleTeamEarnXp(int teamId, int amount) {
-        Log.info(teams.getTeam(teamId));
         teams.getTeam(teamId).earnExp(amount);
     }
 
