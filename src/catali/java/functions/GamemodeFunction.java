@@ -238,7 +238,6 @@ public class GamemodeFunction {
                 break;
         }
         units.add(crawler);
-        units.add(missile);
         units.add(latum);
 
         return units;
